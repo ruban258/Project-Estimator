@@ -1,7 +1,8 @@
 <script>
-    export let id = 33;
-    export let name ="wood";
-    export let price= 33.33;
+    import materialStore from './material.store.js';
+    export let id;
+    export let name ="";
+    export let price;
 
     $:mode = id ? "edit" : "add";
     $:canSubmit = price >= 0 && price !== "" && name !== "";
@@ -9,6 +10,10 @@
     function onSubmit (){
         if(!canSubmit){
             return;
+        }
+
+        if(mode === 'add'){
+            materialStore.add(name,price)
         }
         price = "";
         name = "";
